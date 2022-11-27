@@ -1,0 +1,18 @@
+@model ContatoModel
+
+@{
+    ViewData["Title"] = "Confirmar apagar Contato";
+}
+
+<div class="text-center">
+  <h3>Realmente deseja apagar o contato(@Model.Nome )</h3>
+</div>
+
+
+  <a class="btn btn-primary  btn-lg w-100 d-block" role="button"  asp-controller ="Contato" asp-action="Index">Cancelar Exclusão</a>
+  <a class="btn btn-danger btn-lg w-100 d-block" role="button"  asp-controller ="Contato" asp-route-id="@Model.Id" asp-action="Apagar">Vamos Exluir</a>
+
+<!-- o display block não tava funcionando a centralizar ai colocou o w-100 q é largura 100%  ->
+<!- btn-lg é em relação ao tamanho lg de grande  -->
+
+  

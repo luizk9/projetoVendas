@@ -1,0 +1,70 @@
+@model List<ContatoModel>
+
+@{
+    ViewData["Title"] = "Lista de Contato";
+}
+
+  <div>
+      <a class="btn btn-primary btn-lg" role="button" asp-controller="Contato" asp-action="Criar" >Adicionar novo contato...</a>  
+  </div>
+  <div>
+      <h1 class="display-4">Lista de Vendas</h1>  
+  </div>
+  <br/>
+
+<!-- menssagens de erro bootstrap alert -->
+
+@if(TempData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-danger text-center" role="alert">
+      <button type="button" class="btn btn-danger btn-sm close-alert" ariel-label="Close">x</button>
+      
+      @TempData["MensagemSucesso"]
+    </div>
+}
+
+@if(TempData["MensagemErro"] != null)
+{  
+    <div class="alert alert-success text-center" role="alert">
+     <button type="button" class="btn btn-danger btn-sm close-alert" ariel-label="Close">x</button>
+      This is a success alert—check it out!
+      @TempData["MensagemErro"]
+    </div>
+}
+<br/>
+  
+<!-- fim-->
+<div class="text-center">
+<table  class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">NOME</th>
+      <th scope="col">LOCAL</th>
+      <th scope="col">VALOR TOTAL</th>
+       <th scope="col">-</th>
+    </tr>
+  </thead>
+  <tbody >
+    @if(Model !=null && Model.Any())
+    {
+      foreach(ContatoModel contato in Model)
+       {
+        <tr>
+            <th scope="row">@contato.Id</th>          
+            <td>@contato.Nome</td>
+            <td>@contato.Local</td>  
+            <td>@contato.ValorTotal</td>     
+            <td>
+                <div class="btn-group" role="group">
+                    <a role = "button" class="btn btn-primary" asp-route-id="@contato.Id" asp-controller="Contato" asp-action="Editar">Editar</a><br/>
+                    <a role = "button" class="btn btn-danger" asp-route-id="@contato.Id" asp-controller="Contato" asp-action="ApagarConfirmacao" >Apagar</a>              
+                </div>
+            </td>
+        </tr>
+        }
+    }    
+  </tbody>
+</table>
+
+</div>
